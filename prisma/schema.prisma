@@ -1,0 +1,35 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    login     String   @unique
+    password  String
+    salt      String?
+    status    Boolean  @default(true)
+    role      UserRole @default(USER)
+    surname   String
+    firstName String
+    lastName  String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+    USER
+    ADMIN
+}
+
+model Wagon {
+    id     Int    @id @default(autoincrement())
+    number String @unique
+    type   String
+    owner  String
+}
