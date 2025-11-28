@@ -3,13 +3,23 @@
 import { useState, use } from 'react';
 import Link from 'next/link';
 
-import { Plus, Clock, Calendar, FileText, AlertCircle, ArrowLeft, Save } from 'lucide-react';
+import {
+  Plus,
+  Clock,
+  Calendar,
+  FileText,
+  AlertCircle,
+  ArrowLeft,
+  Save,
+  Pencil,
+} from 'lucide-react';
 import {
   Badge,
   Button,
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   Dialog,
@@ -30,7 +40,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from '@/shared/components/ui';
+import { WagonInput } from '@/entities/wagon/ui/wagon-input';
+import { WagonOutput } from '@/entities/wagon/ui/wagon-output';
 
 type OperationType =
   | 'arrival'
@@ -53,7 +69,7 @@ interface Operation {
   notes?: string;
 }
 
-interface WagonDocument {
+export interface WagonDocument {
   id: string;
   wagonNumber: string;
   entranceInvoiceNumber: string;
@@ -185,8 +201,9 @@ export default function WagonDocumentPage({ params }: { params: Promise<{ id: st
                 </Button>
               </Link>
               <div>
-                <h1 className='text-2xl font-bold'>Документ вагона</h1>
-                <p className='text-sm text-muted-foreground'>Номер документа: {document.id}</p>
+                <h1 className='text-2xl font-bold'>
+                  Номер вагона: <span className='text-primary'>54782391</span>
+                </h1>
               </div>
             </div>
             <Badge
@@ -201,53 +218,23 @@ export default function WagonDocumentPage({ params }: { params: Promise<{ id: st
 
       {/* Content */}
       <div className='container mx-auto px-6 py-8 space-y-6'>
+        {/* TABS */}
+        <div className='flex w-full flex-col gap-6'>
+          <Tabs defaultValue='input'>
+            <TabsList>
+              <TabsTrigger value='input'>Вход</TabsTrigger>
+              <TabsTrigger value='output'>Выход</TabsTrigger>
+            </TabsList>
+            <TabsContent value='input'>
+              <WagonInput document={document} />
+            </TabsContent>
+            <TabsContent value='output'>
+              <WagonOutput document={document} />
+            </TabsContent>
+          </Tabs>
+        </div>
+
         {/* Document Header */}
-        <Card>
-          <CardHeader>
-            <CardTitle className='text-lg'>Основные данные</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='grid gap-4 md:grid-cols-3'>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Номер вагона</Label>
-                <div className='font-mono text-xl font-bold'>{document.wagonNumber}</div>
-              </div>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Входная накладная</Label>
-                <div className='font-medium'>{document.entranceInvoiceNumber}</div>
-              </div>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Выходная накладная</Label>
-                <div className='font-medium text-muted-foreground'>
-                  {document.exitInvoiceNumber || 'Не оформлена'}
-                </div>
-              </div>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Время прибытия</Label>
-                <div className='flex items-center gap-2'>
-                  <Calendar className='h-4 w-4 text-muted-foreground' />
-                  <span>{document.arrivalDate}</span>
-                </div>
-              </div>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Время отправки</Label>
-                <div className='flex items-center gap-2'>
-                  <Calendar className='h-4 w-4 text-muted-foreground' />
-                  <span className='text-muted-foreground'>
-                    {document.departureDate || 'В процессе'}
-                  </span>
-                </div>
-              </div>
-              <div className='space-y-2'>
-                <Label className='text-muted-foreground'>Общее время на объекте</Label>
-                <div className='flex items-center gap-2 text-lg font-bold text-primary'>
-                  <Clock className='h-5 w-5' />
-                  <span>{document.totalTimeOnSite}</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Time Summary */}
         <div className='grid gap-4 md:grid-cols-2'>

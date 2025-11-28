@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
   Table,
-} from '../ui';
+} from '../../shared/components/ui';
 import { useRouter } from 'next/navigation';
 
 type WagonStatus = 'arrived' | 'in_process' | 'departed';
@@ -90,7 +90,7 @@ const statusConfig: Record<
   },
 };
 
-export function WagonList() {
+export function WagonOperations() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 

@@ -6,3 +6,4 @@ export { Label } from './label';
 export * from './table';
 export * from './dialog';
 export * from './select';
+export * from './tabs';

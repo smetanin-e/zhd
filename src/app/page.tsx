@@ -1,9 +1,9 @@
-import { WagonList } from '@/shared/components/develop/wagon-list';
+import { WagonOperations } from '@/widgets/wagon/wagon-operations';
 
 export default function Home() {
   return (
     <div>
-      <WagonList />
+      <WagonOperations />
     </div>
   );
 }
