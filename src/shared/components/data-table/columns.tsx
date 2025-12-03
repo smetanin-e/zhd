@@ -2,15 +2,12 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/shared/components/ui/';
-import { CircleX, PencilLine } from 'lucide-react';
+import { X } from 'lucide-react';
+import { Wagon, WagonOperations } from '@/entities/wagon/model/types';
+import { Station } from '@/entities/station/model/types';
+import { Product } from '@/entities/product/model/types';
 
-export type Wagon = {
-  number: string;
-  type: string;
-  owner: string;
-};
-
-export const columns: ColumnDef<Wagon>[] = [
+export const wagonColumns: ColumnDef<Wagon>[] = [
   {
     accessorKey: 'number',
     header: 'Номер',
@@ -24,15 +21,102 @@ export const columns: ColumnDef<Wagon>[] = [
     header: 'Владелец',
   },
   {
+    accessorKey: 'barPackage',
+    header: 'Тара с бруса (т)',
+    meta: { align: 'center' },
+  },
+  {
+    accessorKey: 'capacity',
+    header: 'Грузоподъемность (т)',
+    meta: { align: 'center' },
+  },
+  {
+    accessorKey: 'volume',
+    header: 'Объем (м³)',
+    meta: { align: 'center' },
+  },
+  {
+    id: 'actions',
+    header: 'Действия',
+    meta: { align: 'right' },
+    cell: () => (
+      <div className='flex justify-end'>
+        <Button variant='ghost' size='icon'>
+          <X className='w-4 h-4' />
+        </Button>
+      </div>
+    ),
+  },
+];
+
+export const operationColumns: ColumnDef<WagonOperations>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Операция',
+  },
+  {
+    accessorKey: 'normative',
+    header: 'Норма',
+  },
+  {
     id: 'actions',
     header: 'Действия',
     cell: () => (
       <div className='flex gap-2'>
         <Button variant='ghost' size='icon'>
-          <PencilLine className='w-4 h-4' />
+          <X className='w-4 h-4' />
         </Button>
+      </div>
+    ),
+  },
+];
+
+export const stationColumns = (withCode: boolean): ColumnDef<Station>[] => [
+  {
+    accessorKey: 'name',
+    header: 'Станция',
+  },
+  ...(withCode
+    ? [
+        {
+          accessorKey: 'code',
+          header: 'Код',
+        } as ColumnDef<Station>,
+      ]
+    : []),
+  {
+    id: 'actions',
+    header: 'Действия',
+    cell: () => (
+      <div className='flex gap-2'>
         <Button variant='ghost' size='icon'>
-          <CircleX className='w-4 h-4' />
+          <X className='w-4 h-4' />
+        </Button>
+      </div>
+    ),
+  },
+];
+
+export const productColumns: ColumnDef<Product>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Содержимое вагона',
+  },
+  {
+    accessorKey: 'nationalCode',
+    header: 'ГНГ',
+  },
+  {
+    accessorKey: 'internationalCode',
+    header: 'ЕГСНГ',
+  },
+  {
+    id: 'actions',
+    header: 'Действия',
+    cell: () => (
+      <div className='flex gap-2'>
+        <Button variant='ghost' size='icon'>
+          <X className='w-4 h-4' />
         </Button>
       </div>
     ),

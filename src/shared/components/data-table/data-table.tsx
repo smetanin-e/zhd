@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/shared/lib/utils';
 import {
   ColumnDef,
   flexRender,
@@ -62,7 +63,11 @@ export function DataTable<TData, TValue>({
               <div
                 key={header.id}
                 onClick={header.column.getToggleSortingHandler()}
-                className='cursor-pointer select-none'
+                className={cn(
+                  'cursor-pointer select-none',
+                  header.column.columnDef.meta?.align === 'center' && 'text-center',
+                  header.column.columnDef.meta?.align === 'right' && 'text-right',
+                )}
               >
                 {flexRender(header.column.columnDef.header, header.getContext())}
                 {{
@@ -83,7 +88,15 @@ export function DataTable<TData, TValue>({
               style={{ gridTemplateColumns: gridStyle }}
             >
               {row.getVisibleCells().map((cell) => (
-                <div key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+                <div
+                  key={cell.id}
+                  className={cn(
+                    cell.column.columnDef.meta?.align === 'center' && 'text-center',
+                    cell.column.columnDef.meta?.align === 'right' && 'text-right',
+                  )}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </div>
               ))}
             </div>
           ))

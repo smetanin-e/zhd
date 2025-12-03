@@ -45,9 +45,6 @@ export const WagonInput: React.FC<Props> = ({ document }) => {
             <Label className='text-muted-foreground'>Тара с бруса (т)</Label>
             <div className='flex items-center gap-4'>
               <span className='font-medium text-2xl'>123</span>
-              <Button variant='ghost' size='icon' className='pt-1'>
-                <Pencil className='h-4 w-4' />
-              </Button>
             </div>
           </div>
           <div className='space-y-2'>
@@ -168,9 +165,6 @@ export const WagonInput: React.FC<Props> = ({ document }) => {
             <Label className='text-muted-foreground'>Грузоподъемность (т)</Label>
             <div className='flex items-center gap-4'>
               <span className='font-medium text-2xl'>300</span>
-              <Button variant='ghost' size='icon' className='pt-1'>
-                <Pencil className='h-4 w-4' />
-              </Button>
             </div>
           </div>
 
@@ -178,9 +172,6 @@ export const WagonInput: React.FC<Props> = ({ document }) => {
             <Label className='text-muted-foreground'>Объем (м.куб.)</Label>
             <div className='flex items-center gap-4'>
               <span className='font-medium text-2xl'>23</span>
-              <Button variant='ghost' size='icon' className='pt-1'>
-                <Pencil className='h-4 w-4' />
-              </Button>
             </div>
           </div>
         </div>
