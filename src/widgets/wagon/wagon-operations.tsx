@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, ChevronRight, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ForwardRefExoticComponent, RefAttributes, useState } from 'react';
+import { Search, ChevronRight, Clock, CheckCircle2, AlertCircle, LucideProps } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -71,7 +71,11 @@ const mockWagons: Wagon[] = [
 
 const statusConfig: Record<
   WagonStatus,
-  { label: string; variant: 'default' | 'secondary' | 'outline'; icon: any }
+  {
+    label: string;
+    variant: 'default' | 'secondary' | 'outline';
+    icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
+  }
 > = {
   arrived: {
     label: 'Прибыл',

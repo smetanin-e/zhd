@@ -24,7 +24,7 @@ export default function ReferencesPage() {
         </div>
       </div>
 
-      <div className='flex w-full flex-col gap-6'>
+      <div>
         <Tabs defaultValue='wagons'>
           <TabsList className='gap-4'>
             <TabsTrigger value='wagons'>Вагоны</TabsTrigger>

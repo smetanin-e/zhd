@@ -1,16 +1,15 @@
 'use client';
 import { Wagon } from '@/entities/wagon/model/types';
 import { wagonColumns } from '@/shared/components/data-table/columns';
-import { DataTable } from '@/shared/components/data-table/data-table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui';
+import { ReferenceDataCard } from '@/shared/components/reference-data-card';
 import { ToyBrick } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface Props {
   className?: string;
 }
 
-const data: Wagon[] = [
+export const wagonData: Wagon[] = [
   {
     number: '23749545',
     type: 'Полувагон',
@@ -225,34 +224,14 @@ const data: Wagon[] = [
   },
 ];
 export const WagonReference: React.FC<Props> = () => {
-  const [globalFilter, setGlobalFilter] = useState('');
   return (
-    <Card className='gap-1 p-0 overflow-hidden border-green-500/20'>
-      <CardHeader className='pb-5 pt-4 relative shadow-sm bg-card-header'>
-        <div className='flex items-center justify-between'>
-          <CardTitle className='flex items-center gap-2'>
-            <ToyBrick className='h-8 w-8 rotate-180' />
-            Список вагонов
-          </CardTitle>
-
-          {/* Поиск в шапке */}
-          <input
-            placeholder='Поиск по номеру...'
-            className='w-full max-w-xs rounded-md border px-3 py-2 text-sm'
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-          />
-        </div>
-      </CardHeader>
-      <CardContent className='relative h-[625px] p-0'>
-        <DataTable
-          columns={wagonColumns}
-          data={data}
-          globalFilter={globalFilter} // передаем состояние поиска
-          onGlobalFilterChange={setGlobalFilter} // и функцию для обновления
-          gridTemplate={['120px', '120px', '1fr', '100px', '140px', '70px', '130px']}
-        />
-      </CardContent>
-    </Card>
+    <ReferenceDataCard
+      title='Список вагонов'
+      gridTemplate={['120px', '120px', '1fr', '100px', '140px', '70px', '130px']}
+      columns={wagonColumns}
+      data={wagonData}
+      icon={<ToyBrick className='h-8 w-8 rotate-180' />}
+      contentHeight={'max-h-[600px]'}
+    />
   );
 };

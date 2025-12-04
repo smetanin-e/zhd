@@ -30,6 +30,17 @@ enum UserRole {
 model Wagon {
     id     Int    @id @default(autoincrement())
     number String @unique
-    type   String
+    type   WagonType?
     owner  String
+    barPackage Decimal @db.Decimal(10, 3) //тара с бруса (т)
+    capacity Decimal @db.Decimal(10, 3) //Грузоподъемность (т)
+    volume Decimal @db.Decimal(10, 3) //Объем (м³)
+}
+
+model WagonType {
+    id     Int    @id @default(autoincrement())
+    name String
+
+    wagonId Int
+    wagon Wagon[] 
 }

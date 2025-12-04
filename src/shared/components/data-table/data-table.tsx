@@ -19,6 +19,7 @@ interface DataTableProps<TData, TValue> {
   globalFilter?: string;
   onGlobalFilterChange?: (value: string) => void;
   gridTemplate?: string[];
+  contentHeight?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -27,10 +28,10 @@ export function DataTable<TData, TValue>({
   globalFilter,
   onGlobalFilterChange,
   gridTemplate,
+  contentHeight,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  // убираем локальное состояние globalFilter
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
@@ -39,21 +40,22 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-      globalFilter, // используем переданное значение
+      globalFilter,
     },
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange, // используем переданную функцию
+    onGlobalFilterChange,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
 
   const gridStyle = (gridTemplate || Array(columns.length).fill('1fr')).join(' ');
+  const tableHeight = contentHeight ? contentHeight : '';
 
   return (
     <div className='h-full'>
-      <div className='h-[625px] overflow-auto overflow-y-scroll'>
+      <div className={cn(tableHeight, 'overflow-auto overflow-y-scroll')}>
         <div
           className='grid sticky top-0 z-10 text-sm font-semibold px-4 py-2 bg-card-header shadow-sm mb-2'
           style={{ gridTemplateColumns: gridStyle }}
