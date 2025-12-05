@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui';
 import { OperationReference } from '@/widgets/operations/operation-reference';
-import { ProductReference } from '@/widgets/product/product-reference';
+import { CargoReference } from '@/widgets/cargo/cargo-reference';
 import { InsideStationReference } from '@/widgets/station/inside-station-reference';
 import { OutsideStationReference } from '@/widgets/station/outside-station-reference';
 import { WagonReference } from '@/widgets/wagon/wagon-reference';
@@ -40,7 +40,7 @@ export default function ReferencesPage() {
             <OperationReference />
           </TabsContent>
           <TabsContent value='products'>
-            <ProductReference />
+            <CargoReference />
           </TabsContent>
 
           <TabsContent value='insideStation'>

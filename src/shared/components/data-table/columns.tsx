@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/ui/';
 import { X } from 'lucide-react';
 import { Wagon, WagonOperations } from '@/entities/wagon/model/types';
 import { Station } from '@/entities/station/model/types';
-import { Product } from '@/entities/product/model/types';
+import { Cargo } from '@/entities/cargo/model/types';
 
 export const wagonColumns: ColumnDef<Wagon>[] = [
   {
@@ -97,7 +97,7 @@ export const stationColumns = (withCode: boolean): ColumnDef<Station>[] => [
   },
 ];
 
-export const productColumns: ColumnDef<Product>[] = [
+export const cargoColumns: ColumnDef<Cargo>[] = [
   {
     accessorKey: 'name',
     header: 'Содержимое вагона',

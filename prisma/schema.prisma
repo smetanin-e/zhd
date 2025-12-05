@@ -1,6 +1,6 @@
 generator client {
     provider = "prisma-client"
-    output   = "../src/generated/prisma"
+    output   = "../prisma/generated/"
 }
 
 datasource db {
@@ -30,17 +30,57 @@ enum UserRole {
 model Wagon {
     id     Int    @id @default(autoincrement())
     number String @unique
-    type   WagonType?
-    owner  String
+
+    typeId Int?
+    type   WagonType? @relation(fields: [typeId], references: [id])
+
+    ownerId Int?
+    owner   WagonOwner? @relation(fields: [ownerId], references: [id])
+
     barPackage Decimal @db.Decimal(10, 3) //тара с бруса (т)
-    capacity Decimal @db.Decimal(10, 3) //Грузоподъемность (т)
-    volume Decimal @db.Decimal(10, 3) //Объем (м³)
+    capacity   Decimal @db.Decimal(10, 3) //Грузоподъемность (т)
+    volume     Decimal @db.Decimal(10, 3) //Объем (м³)
+
+    @@index([typeId])
+    @@index([ownerId])
 }
 
 model WagonType {
-    id     Int    @id @default(autoincrement())
-    name String
+    id   Int    @id @default(autoincrement())
+    name String @unique
 
-    wagonId Int
-    wagon Wagon[] 
+    wagons Wagon[]
 }
+
+model WagonOwner {
+    id   Int    @id @default(autoincrement())
+    name String @unique
+
+    wagons Wagon[]
+}
+
+model InsideStation {
+    id   Int    @id @default(autoincrement())
+    name String @unique
+}
+
+model OutsideStation {
+    id   Int    @id @default(autoincrement())
+    name String @unique
+    code String @unique
+}
+
+model Cargo {
+    id   Int    @id @default(autoincrement())
+    name String @unique
+
+    nationalCode      String @unique
+    internationalCode String @unique
+}
+
+// model OperationList {
+//     id   Int    @id @default(autoincrement())
+//     name String @unique
+
+//     normative Decimal @db.Decimal(10, 3)
+// }
