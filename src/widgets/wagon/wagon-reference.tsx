@@ -223,6 +223,9 @@ export const wagonData: Wagon[] = [
     volume: 100,
   },
 ];
+const addItem = (value: boolean) => {
+  alert('Тут будет открываться форма создания');
+};
 export const WagonReference: React.FC<Props> = () => {
   return (
     <ReferenceDataCard
@@ -232,6 +235,7 @@ export const WagonReference: React.FC<Props> = () => {
       data={wagonData}
       icon={<ToyBrick className='h-8 w-8 rotate-180' />}
       contentHeight={'max-h-[600px]'}
+      addItem={addItem}
     />
   );
 };
