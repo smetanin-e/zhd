@@ -3,51 +3,9 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/shared/components/ui/';
 import { X } from 'lucide-react';
-import { Wagon, WagonOperations } from '@/entities/wagon/model/types';
+import { WagonOperations } from '@/entities/wagon/model/types';
 import { Station } from '@/entities/station/model/types';
 import { Cargo } from '@/entities/cargo/model/types';
-
-export const wagonColumns: ColumnDef<Wagon>[] = [
-  {
-    accessorKey: 'number',
-    header: 'Номер',
-  },
-  {
-    accessorKey: 'type',
-    header: 'Тип',
-  },
-  {
-    accessorKey: 'owner',
-    header: 'Владелец',
-  },
-  {
-    accessorKey: 'barPackage',
-    header: 'Тара с бруса (т)',
-    meta: { align: 'center' },
-  },
-  {
-    accessorKey: 'capacity',
-    header: 'Грузоподъемность (т)',
-    meta: { align: 'center' },
-  },
-  {
-    accessorKey: 'volume',
-    header: 'Объем (м³)',
-    meta: { align: 'center' },
-  },
-  {
-    id: 'actions',
-    header: 'Действия',
-    meta: { align: 'right' },
-    cell: () => (
-      <div className='flex justify-end'>
-        <Button variant='ghost' size='icon'>
-          <X className='w-4 h-4' />
-        </Button>
-      </div>
-    ),
-  },
-];
 
 export const operationColumns: ColumnDef<WagonOperations>[] = [
   {

@@ -19,7 +19,7 @@ type CustomSelectProps<T> = {
   onAdd?: React.ReactNode;
 };
 
-export function CustomSelect<T>({
+export function Combobox<T>({
   items,
   value,
   onChange,

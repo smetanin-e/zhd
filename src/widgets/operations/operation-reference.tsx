@@ -1,3 +1,5 @@
+'use client';
+import { useGetWagonOwners } from '@/entities/wagon-owner/api/use-get-owners';
 import { WagonOperations } from '@/entities/wagon/model/types';
 import { operationColumns } from '@/shared/components/data-table/columns';
 import { ReferenceDataCard } from '@/shared/components/reference-data-card';
@@ -44,6 +46,8 @@ const data: WagonOperations[] = [
 ];
 
 export const OperationReference: React.FC<Props> = () => {
+  const { wagonOwners } = useGetWagonOwners(); //TODO ДЛЯ ТЕСТИРОВАНИЯ
+  console.log(wagonOwners);
   return (
     <ReferenceDataCard
       title='Операции'

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { ClearButton, ErrorText, RequiredSymbol } from '@/shared/components';
-import { CustomSelect } from './custom-select';
+import { Combobox } from './combobox';
 
 interface Props<T> {
   className?: string;
@@ -20,7 +20,7 @@ interface Props<T> {
   onAdd?: React.ReactNode;
 }
 
-export const FormCustomSelect = <T extends object>({
+export const FormCombobox = <T extends object>({
   label,
   name,
   required,
@@ -54,7 +54,7 @@ export const FormCustomSelect = <T extends object>({
         render={({ field }) => {
           return (
             <div className='relative'>
-              <CustomSelect<T>
+              <Combobox<T>
                 items={items}
                 value={items.find((i) => getKey(i) === field.value) ?? null}
                 onChange={(val) => field.onChange(val ? getKey(val) : null)}

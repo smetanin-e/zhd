@@ -1,10 +1,14 @@
-export type Wagon = {
+import { WagonOwner, WagonType } from '@generated/client';
+import { Decimal } from '@generated/internal/prismaNamespace';
+
+export type WagonDTO = {
+  id: number;
   number: string;
-  type: string;
-  owner: string;
-  barPackage: number;
-  capacity: number;
-  volume: number;
+  barPackage: Decimal;
+  capacity: Decimal;
+  volume: Decimal;
+  owner: WagonOwner | null;
+  type: WagonType | null;
 };
 
 export type WagonOperations = {
