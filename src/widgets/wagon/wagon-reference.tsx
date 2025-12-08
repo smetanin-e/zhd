@@ -16,6 +16,8 @@ const addItem = (value: boolean) => {
 export const WagonReference: React.FC<Props> = () => {
   const { wagons } = useGetWagons();
 
+  console.log(wagons);
+
   return (
     <ReferenceDataCard
       title='Список вагонов'
